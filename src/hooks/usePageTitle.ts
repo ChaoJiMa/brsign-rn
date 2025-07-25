@@ -9,7 +9,7 @@ export const usePageTitle = (title: string) => {
   // 检查 document 对象是否存在，避免在非浏览器环境中使用时出错
   if (typeof document !== 'undefined') {
     // 如果 document 对象存在，则将传入的标题设置为网页标题
-    document.title = title
+    document.title = title; 
   }
   // 返回传入的标题字符串
   return title

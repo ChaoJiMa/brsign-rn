@@ -1,6 +1,6 @@
 import { APIProvider } from '@/api/common/api-provider';
-import { AuthProvider } from '@/components/AuthContext';
-import { AuthGuard } from '@/components/AuthGuard';
+import { AuthProvider } from '@/components/auth/AuthContext';
+import { AuthGuard } from '@/components/auth/AuthGuard';
 import { useThemeConfig } from '@/lib/use-theme-config';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { ThemeProvider } from '@react-navigation/native';

@@ -1,6 +1,8 @@
 import { router, usePathname } from 'expo-router';
 import { ReactNode, useEffect } from 'react';
 import { useAuth } from './AuthContext';
+import type { Route } from './routes';
+import { publicRoutes, routes } from './routes';
 
 /**
  * AuthGuardProps 类型定义，用于描述 AuthGuard 组件的属性。
@@ -50,7 +52,7 @@ export function AuthGuard({
   // 获取当前页面的路径名
   const pathname = usePathname();
   // 定义公开路由列表，这些路由不需要进行权限验证
-  const publicRoutes = ['/', '/login', '/query'];
+  // const publicRoutes = ['/+not-found', '/', '/login', '/query'];
 
   /**
    * 检查用户是否具有访问当前路由的权限。
@@ -74,19 +76,21 @@ export function AuthGuard({
    * 处理用户无权限访问的情况，根据条件进行重定向。
    */
   useEffect(() => {
+    // 如果当前路由不在所有路由列表中，直接返回
+    if (!routes.some((route: Route) => route.path === pathname)) return;
     // 当 AuthContext 初始化完成，用户无权限访问，且当前路由不是公开路由时
     if (isInitialized && !hasPermission() && !publicRoutes.includes(pathname)) {
       if (!silent) {
         // 非静默重定向，记录来源路由以便登录后跳回
         router.replace({
           pathname: redirectTo,
-          params: { from: pathname } 
+          params: { from: pathname }
         });
       }
       // 执行重定向操作
       router.replace({
         pathname: redirectTo,
-        params: { from: pathname } 
+        params: { from: pathname }
       });
     }
   }, [isInitialized, pathname, user]);

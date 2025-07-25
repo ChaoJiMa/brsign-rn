@@ -1,13 +1,15 @@
+import { PageTitle } from '@/components/PageTitle';
 import { Link, Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useRouteTitle } from '@/hooks/useRouteTitle';
 
-export default function NotFoundScreen() {
+export default PageTitle()(function NotFoundScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: '哎呀!' }} />
+      <Stack.Screen options={{ title: useRouteTitle() }} />
       <ThemedView style={styles.container}>
         <ThemedText type="title"> 您访问的页面不存在!</ThemedText>
         <Link href="/" style={styles.link}>
@@ -16,7 +18,7 @@ export default function NotFoundScreen() {
       </ThemedView>
     </>
   );
-}
+})
 
 const styles = StyleSheet.create({
   container: {
