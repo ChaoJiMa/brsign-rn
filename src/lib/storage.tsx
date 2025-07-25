@@ -1,6 +1,17 @@
+import { Platform } from 'react-native';
 import { MMKV } from 'react-native-mmkv';
 
-export const storage = new MMKV();
+// Web 平台不传 encryptionKey
+const webSafeConfig = Platform.select({
+  native: {
+    id: 'user-storage',
+    encryptionKey: 'your-secret-key-32-chars' // 仅原生平台生效
+  },
+  default: {
+    id: 'user-storage' // Web 平台配置
+  }
+});
+export const storage = new MMKV(webSafeConfig);
 
 export function getItem<T>(key: string): T | null {
   const value = storage.getString(key);

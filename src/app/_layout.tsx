@@ -1,4 +1,6 @@
 import { APIProvider } from '@/api/common/api-provider';
+import { AuthProvider } from '@/components/AuthContext';
+import { AuthGuard } from '@/components/AuthGuard';
 import { useThemeConfig } from '@/lib/use-theme-config';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { ThemeProvider } from '@react-navigation/native';
@@ -12,13 +14,17 @@ import 'react-native-reanimated';
 
 export default function RootLayout() {
   return (
-    <Providers>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </Providers>
+    <AuthProvider>
+      <AuthGuard>
+        <Providers>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </Providers>
+      </AuthGuard>
+    </AuthProvider>
   )
 }
 function Providers({ children }: { children: React.ReactNode }) {
