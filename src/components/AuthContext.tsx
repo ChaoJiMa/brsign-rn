@@ -59,7 +59,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
      */
     const initAuth = async () => {
       // 从本地存储获取令牌
-      const token = getToken();
+      const token = await getToken();
       if (token) {
         try {
           // 实际项目中应调用 API 验证令牌有效性，此处使用模拟用户数据
@@ -90,7 +90,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // 设置用户状态
     setUser(userData);
     // 登录成功后跳转到首页
-    router.replace('/'); 
+    router.replace('/');
   };
 
   /**

@@ -58,6 +58,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     [
+      'expo-secure-store',
+      {
+        "configureAndroidBackup": true,
+        "faceIDPermission": "允许 $(PRODUCT_NAME) 访问您的 Face ID 生物识别数据。"
+      },
+    ],
+    [
       'expo-splash-screen',
       {
         backgroundColor: '#2E3C4B',
