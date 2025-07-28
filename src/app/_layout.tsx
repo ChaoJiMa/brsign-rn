@@ -10,12 +10,13 @@ import { StyleSheet } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 // import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { PageTitle } from '@/components/PageTitle';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
 SplashScreen.preventAutoHideAsync(); // 阻止启动页自动隐藏
-export default function RootLayout() {
+export default PageTitle()(function RootLayout() {
   return (
     <AuthProvider>
       <AuthGuard>
@@ -29,7 +30,7 @@ export default function RootLayout() {
       </AuthGuard>
     </AuthProvider>
   )
-}
+})
 function Providers({ children }: { children: React.ReactNode }) {
   const theme = useThemeConfig();
   const [isReady, setIsReady] = useState(false);
